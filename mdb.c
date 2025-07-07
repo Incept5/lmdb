@@ -5365,7 +5365,11 @@ mdb_env_setup_locks(MDB_env *env, MDB_name *fname, int mode, int *excl)
 #endif
 #ifdef MDB_USE_SYSV_SEM
 	int semid;
-	union semun semu;
+	union semun {
+		int val;
+		struct semid_ds *buf;
+		unsigned short  *array;
+	} semu;
 #endif
 	int rc;
 	MDB_OFF_T size, rsize;
