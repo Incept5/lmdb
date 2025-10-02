@@ -113,3 +113,14 @@ man_files = files(
 )
 
 install_man(man_files)
+
+pkg = import('pkgconfig')
+
+pkg.generate(
+  libraries : lmdb,
+  name : 'lmdb',
+  description : 'LMDB database library',
+  version : meson.project_version(),
+  url: 'https://github.com/incept5/lmdb',
+  install_dir : join_paths(get_option('libdir'), 'pkgconfig')
+)
